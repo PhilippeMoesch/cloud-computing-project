@@ -17,7 +17,7 @@ fi
 echo press key... # sleep 20
 read ok
 
-echo blacksholes dedup fft canneal ferret freqmine all 
+echo blackscholes dedup fft canneal ferret freqmine all 
 
 read benchmark
 count=1; # number of runs
@@ -100,12 +100,12 @@ fi
 if [[ "$benchmark" == "blacksholes" || "$benchmark" == "all" ]]; then
     for i in $(seq $count); do
         echo running blacksholes
-        kubectl create -f parsec-benchmarks/part2a/parsec-blacksholes.yaml
+        kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
         echo run number $i #, press key to go on
         echo sleeping...
         sleep 3m # 2 minutes was not enough sometimes
         #read ok
-        ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-blacksholes --output=jsonpath='{.items[*].metadata.name}'))
+        ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
         #echo "${ans}"
         kubectl delete jobs --all
