@@ -17,22 +17,10 @@ fi
 echo press key... # sleep 20
 read ok
 
-echo blacksholes dedup fft canneal ferret freqmine all none
+echo blacksholes dedup fft canneal ferret freqmine all 
 
 read benchmark
 count=1; # number of runs
-
-#if [[ "$benchmark" == "none" || "$benchmark" == "all" ]]; then
-#    for i in $(seq $count); do
-#        kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
-#        echo run number $i, press key to go on
-#        read ok
-#        ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}'))
-#        echo "${ans}" | grep user
-#        #echo "${ans}"
-#        kubectl delete jobs --all
-#    done
-#fi
 
 if [[ "$benchmark" == "fft" || "$benchmark" == "all" ]]; then
     for i in $(seq $count); do
