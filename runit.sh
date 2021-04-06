@@ -40,7 +40,7 @@ if [[ "$benchmark" == "fft" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-fft.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 3m # 2 minutes was not enough sometimes
+        sleep 30s 
         #read ok # sleep ...
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-splash2x-fft --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
@@ -55,7 +55,7 @@ if [[ "$benchmark" == "freqmine" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 3m # 2 minutes was not enough sometimes
+        sleep 30s
         #read ok
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
