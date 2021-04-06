@@ -97,7 +97,7 @@ if [[ "$benchmark" == "canneal" || "$benchmark" == "all" ]]; then
     done
 fi
 
-if [[ "$benchmark" == "blacksholes" || "$benchmark" == "all" ]]; then
+if [[ "$benchmark" == "blackscholes" || "$benchmark" == "all" ]]; then
     for i in $(seq $count); do
         echo running blacksholes
         kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
