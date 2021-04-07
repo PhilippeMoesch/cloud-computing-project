@@ -28,7 +28,7 @@ if [[ "$benchmark" == "fft" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-fft.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 30s 
+        sleep 2m 
         #read ok # sleep ...
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-splash2x-fft --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
@@ -43,7 +43,7 @@ if [[ "$benchmark" == "freqmine" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-freqmine.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 30s
+        sleep 2m
         #read ok
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-freqmine --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
@@ -58,7 +58,7 @@ if [[ "$benchmark" == "ferret" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-ferret.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 30s
+        sleep 2m
         #read ok
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-ferret --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
@@ -73,7 +73,7 @@ if [[ "$benchmark" == "dedup" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-dedup.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 3m # 2 minutes was not enough sometimes
+        sleep 6m # 2 minutes was not enough sometimes
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-dedup --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
         #echo "${ans}"
@@ -88,7 +88,7 @@ if [[ "$benchmark" == "canneal" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-canneal.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 30s
+        sleep 2m
         #read ok
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-canneal --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
@@ -103,7 +103,7 @@ if [[ "$benchmark" == "blackscholes" || "$benchmark" == "all" ]]; then
         kubectl create -f parsec-benchmarks/part2a/parsec-blackscholes.yaml
         echo run number $i #, press key to go on
         echo sleeping...
-        sleep 3m # 2 minutes was not enough sometimes
+        sleep 7m # 2 minutes was not enough sometimes
         #read ok
         ans=$(kubectl logs $(kubectl get pods --selector=job-name=parsec-blackscholes --output=jsonpath='{.items[*].metadata.name}'))
         echo "${ans}" | grep user
