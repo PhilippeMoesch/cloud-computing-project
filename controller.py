@@ -12,6 +12,12 @@ Design options:
 Important Points:
 - SLO of memcached below 2ms
 - logs that show correct time (script wants UNIX Time) and if used, pause/unpause times of the container
+
+SSH command to copy files from local to VM:
+gcloud compute scp <LOCAL_FILE_PATH> <USER@VM_NAME>:~<REMOTE_FILE_PATH>
+
+SSH command to connect
+gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@<MACHINE_NAME> --zone europe-west3-a
 """
 # <image_name> = client.containers.run(ferret, cpuset_cpus="1,2", detach=True, remove=True, name="parsec", working_dir=".")
 # <image_name>.update(cpuset_cpus="3,4")
