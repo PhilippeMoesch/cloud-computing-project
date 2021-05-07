@@ -1,6 +1,7 @@
 # cloud-computing-project
 
-Cloud Computing Architecture course project at ETH Zurich (FS 21) 
+Cloud Computing Architecture course project at ETH Zurich (FS 21).
+
 Scheduling latency-sensitive and batch applications in a cloud cluster.
 
 --------------------
