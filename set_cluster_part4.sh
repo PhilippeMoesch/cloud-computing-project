@@ -55,7 +55,9 @@ if [[ "$ans" != "y" ]]; then
    kops validate cluster --wait 10m
 fi
 
-echo parsing cluster data...
+echo "cluster ready"
+echo "parsing cluster data..."
+printf "\n"
 
 #sudo kubectl get nodes -o wide
 t=$(sudo kubectl get nodes -o wide)
@@ -86,42 +88,54 @@ echo "$measure_name with external IP : $external_measure"
 echo "$memcache_name with external IP : $external_memcache"
 echo "$master_name with external IP : $external_master"
 
-# Quit if you only needed to set up a cluster
-echo "CLUSTER READY, continue ? (y/n) [default: yes]"
+printf "\n End here [0] \n Install memcache on memcache-server [1] \n Install mcperf on agent-server [2] \n Install mcperf on measure-server [3] \n Install everything [4]"
+
 read ans
-if [[ "$ans" != "n" ]]; then
+if [[ "$ans" == "0" ]]; then
     exit
 fi
-
-## install memcached on the memcache-server
-echo "connection to memcache server..."
-gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@memcache_name --zone europe-west3-a
-echo "update and install memcache"
-sudo apt update
-sudo apt install -y memcached libmemcached-tools
-echo "modyfing configuration file"
-sudo sed -i "s/^-m.*/-m ${1024}/"  /etc/memcached.conf
-sudo sed -i "s/^-l.*/-l ${internal_memcache}/"  /etc/memcached.conf
-#sudo sed -i "s/^-t.*/-t ${num_threads}/"  /etc/memcached.conf
-sudo systemctl restart memcached
-
-echo "memcached running"
-read ok
-## client measure
-
-# send the set
-gcloud compute scp --zone europe-west3-a setup_dyn_memc.sh root@client-measure-vchb:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
-gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@client-measure-vchb --zone europe-west3-a
-
-# remove if you are using Unix
+ 
 sudo apt install dos2unix
 sudo dos2unix setup_dyn_memc.sh
+sudo dos2unix setup_memc.sh
 
-sudo cp /etc/apt/sources.list /etc/apt/sources.list~
-sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-sudo apt-get update
+# memcache
+#sudo chmod -x setup_mem.sh 
+echo "installing memcache..."
 
-sudo bash setup_dyn_mems.sh
+if [[ "$ans" == "1" || "$ans" == "4" ]]; then
 
-cd memcache-perf-dynamics
-sudo make
+   ## install memcached on the memcache-server
+   echo "sending execution script to memcache server"
+   gcloud compute scp --zone europe-west3-a setup_memc.sh root@$memcache_name:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
+   echo "connection to memcache server..."
+   echo "run the following : sudo bash setup_memc.sh"
+   gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$memcache_name --zone europe-west3-a
+
+   echo "left vm"
+fi
+
+## client measure
+
+echo "installing parsec on agent..."
+if [[ "$ans" == "2" || "$ans" == "4" ]]; then
+   # send the set
+   echo "sending execution script to agent server"
+   gcloud compute scp --zone europe-west3-a setup_dyn_memc.sh root@$agent_name:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
+   echo "connection to agent server..."
+   echo "run the following : sudo bash setup_dyn_memc.sh"
+   gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$agent_name --zone europe-west3-a
+fi
+
+## client measure
+
+echo "installing parsec on measure..."
+if [[ "$ans" == "3" || "$ans" == "4" ]]; then
+   # send the set
+   echo "sending execution script to measure server"
+   gcloud compute scp --zone europe-west3-a setup_dyn_memc.sh root@$measure_name:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
+   echo "connection to measure server..."
+   echo "run the following : sudo bash setup_dyn_memc.sh"
+   gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$measure_name --zone europe-west3-a
+fi
+
