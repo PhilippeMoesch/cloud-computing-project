@@ -6,6 +6,8 @@
    sudo apt install -y memcached libmemcached-tools docker python3-pip
    echo "Done, now modyfing configuration file"
    sudo sed -i "s/^-m.*/-m ${1024}/"  /etc/memcached.conf
+   echo "enter internal ip"
+   read $internal_memcache
    sudo sed -i "s/^-l.*/-l ${internal_memcache}/"  /etc/memcached.conf
    #sudo sed -i "s/^-t.*/-t ${num_threads}/"  /etc/memcached.conf
    sudo systemctl restart memcached
