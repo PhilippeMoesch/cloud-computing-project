@@ -1,56 +1,42 @@
 #!/bin/bash
-# if you need more echos : set -x #echo on 
 
-# specifiy number of memcached threads here :
-# num_threads = 1 
-
-# if error : x509: certificate signed by unknown authority]
-# exectute : export no_proxy=$no_proxy,*.docker.internal
-
-#enter yes to jump to the next step directly
-
-
+PROJECT=$(gcloud config get-value project)
+id="moeschp"
+#echo $PROJECT
    build_cluster() {
       echo "enter ID [default: moeschp]"
       read ans
+      
+      export KOPS_STATE_STORE=$PROJECT-$id
+      export KOPS_FEATURE_FLAGS=AlphaAllowGCE
+      
+      echo "Empty bucket ? (y/n) [default: no]"
+      read ans 
 
-      id="moeschp"
-      if [[ "$ans" != "" ]]; then
-         echo "you entered $ans"
-         id=$ans
+      if [[ "$ans" == "y" ]]; then
+         echo "gsutil -m rm -r gs://$KOPS_STATE_STORE"
+         gsutil -m rm -r gs://$KOPS_STATE_STORE
       fi
 
-      export KOPS_STATE_STORE=gs://cca-eth-2021-group-20-$id/
-      export KOPS_FEATURE_FLAGS=AlphaAllowGCE
- 
-      echo "start gcloud ? (y/n) [default: yes]"
+      echo "start gcloud & create bucket? (y/n) [default: yes]"
       read ans 
 
       if [[ "$ans" != "n" ]]; then
-         #echo "sudo gcloud init"
-         sudo gcloud init
+         echo "gcloud init"
+         gcloud init
+         echo "gsutil mb gs://$KOPS_STATE_STORE"
+         gsutil mb gs://$KOPS_STATE_STORE
       fi
 
       #gcloud auth application-default login
 
-      echo "Empty and refill Gcloud bucket ? (y/n) [default: yes]"
-      read ans 
-
-      if [[ "$ans" != "n" ]]; then
-         echo "gsutil rm -r $KOPS_STATE_STORE"
-         sudo gsutil -m rm -r $KOPS_STATE_STORE
-         echo "gsutil mb $KOPS_STATE_STORE"
-         sudo gsutil mb $KOPS_STATE_STORE
-      fi
-
       echo "CREATING CLUSTER"
-      PROJECT='glcoud config get-value project'
       echo "kops create -f part4.yaml"
-      sudo kops create -f part4.yaml --state cca-eth-2021-group-20-$id
+      sudo kops create -f part4.yaml #--state $PROJECT-$id
       echo "kops update cluster --name part4.k8s.local --yes --admin"
-      sudo kops update cluster --name part4.k8s.local --yes --admin --state cca-eth-2021-group-20-$id
+      kops update cluster --name part4.k8s.local --yes --admin #--state $PROJECT-$id
       echo "kops validate cluster --wait 10m"
-      sudo kops validate cluster --wait 10m --state cca-eth-2021-group-20-$id
+      kops validate cluster --wait 10m # --state $PROJECT-id
       echo "cluster ready"
    }
 
@@ -62,10 +48,14 @@
       #sudo kubectl get nodes -o wide
       t=$(sudo kubectl get nodes -o wide)
       
-      if [[ "$1" == "ip" ]]; then
+      if [[ "$1" == "ip_memcache" ]]; then
          ips=$(echo "$t" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
          ips=($ips)
          echo "${ips[6]}"
+      elif [[ "$1" == "ip_agent" ]]; then
+         ips=$(echo "$t" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+         ips=($ips)
+         echo "${ips[0]}"
       else
          # specific VM name
          name=($(echo "$t" | grep '$1'))
@@ -89,7 +79,9 @@
    }
    
    remove_cluster() {
-      sudo kops delete cluster part4.k8s.local --yes --state cca-eth-2021-group-20-moeschp
+      echo "kops delete cluster part4.k8s.local --yes --state $PROJECT-$id"
+      kops delete cluster part4.k8s.local --yes --state $PROJECT-$id
+      exit  
    }
 
 
