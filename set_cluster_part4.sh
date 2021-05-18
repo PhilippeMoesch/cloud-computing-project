@@ -1,8 +1,9 @@
 #!/bin/bash
 
-PROJECT=$(gcloud config get-value project)
+PROJECT="project-cca-313617"
 id="moeschp"
-#echo $PROJECT
+# pro. id = project-cca-313617
+
    build_cluster() {
       echo "enter ID [default: moeschp]"
       read ans
@@ -18,25 +19,29 @@ id="moeschp"
          gsutil -m rm -r gs://$KOPS_STATE_STORE
       fi
 
-      echo "start gcloud & create bucket? (y/n) [default: yes]"
+      echo "start gcloud (y/n) [default: no]"
       read ans 
 
-      if [[ "$ans" != "n" ]]; then
+      if [[ "$ans" == "y" ]]; then
          echo "gcloud init"
-         gcloud init
-         echo "gsutil mb gs://$KOPS_STATE_STORE"
-         gsutil mb gs://$KOPS_STATE_STORE
+         gcloud init --skip-diagnostics
       fi
-
-      #gcloud auth application-default login
+      
+      echo "create bucket? (y/n) [default: no]"
+      read ans 
+      
+      if [[ "$ans" == "y" ]]; then
+         echo "gsutil mb gs://$KOPS_STATE_STORE"
+         sudo gsutil mb gs://$KOPS_STATE_STORE
+      fi
 
       echo "CREATING CLUSTER"
       echo "kops create -f part4.yaml"
-      sudo kops create -f part4.yaml #--state $PROJECT-$id
-      echo "kops update cluster --name part4.k8s.local --yes --admin"
-      kops update cluster --name part4.k8s.local --yes --admin #--state $PROJECT-$id
+      kops create -f part4.yaml --state $PROJECT-$id
+      echo "kops update cluster part4.k8s.local --yes --admin"
+      kops update cluster --name part4.k8s.local --yes --admin --state $PROJECT-$id
       echo "kops validate cluster --wait 10m"
-      kops validate cluster --wait 10m # --state $PROJECT-id
+      kops validate cluster --wait 10m  --state $PROJECT-id
       echo "cluster ready"
    }
 
@@ -65,6 +70,13 @@ id="moeschp"
          echo "$name"
       fi
    }
+   
+   auth() {
+       #echo "gcloud auth application-default login"
+       #gcloud auth application-default login
+       export GOOGLE_APPLICATION_CREDENTIALS="project-cca-313617-45143eb20673.json"
+
+   }
 
 
    install_() {
@@ -81,7 +93,6 @@ id="moeschp"
    remove_cluster() {
       echo "kops delete cluster part4.k8s.local --yes --state $PROJECT-$id"
       kops delete cluster part4.k8s.local --yes --state $PROJECT-$id
-      exit  
    }
 
 
@@ -92,7 +103,7 @@ if [[ "$ans" != "y" ]]; then
    build_cluster
 fi
 
-printf "\n End here [0] \n Install memcache on memcache-server [1] \n Install mcperf on agent-server [2] \n Install mcperf on measure-server [3] \n Install everything [4] \n Delete Cluster[5] \n"
+printf "\n End here [0] \n Install memcache on memcache-server [1] \n Install mcperf on agent-server [2] \n Install mcperf on measure-server [3] \n Install everything [4] \n Delete Cluster[5] \n Authentify[6] \n"
 
 read ans
 if [[ "$ans" == "0" ]]; then
@@ -101,6 +112,12 @@ fi
 
 if [[ "$ans" == "5" ]]; then
     remove_cluster
+    exit
+fi
+
+if [[ "$ans" == "6" ]]; then
+    auth
+    exit
 fi
  
 sudo apt install dos2unix
