@@ -40,7 +40,7 @@ cpuNum = 2
 # process id of memcached
 pid = sys.argv[1]
 indexContainers2and3 = 0
-indexContainers1 = 0
+indexContainers1 = 4
 
 # let memcached run on cores 0 and 1
 os.system('sudo taskset -a -cp 0-1 ' + pid)
@@ -49,20 +49,22 @@ jobCommand = lambda index, t : "/bin/sh -c './bin/parsecmgmt -a run -p " + parse
 
 # start freqmine job
 #jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 2'"
-jobName = "run_" + parsec_names[0]
-currentContainer = client.containers.run(parsec_jobs[0], command=jobCommand(0,2), cpuset_cpus="2-3", detach=True, remove=False, name=jobName)
+jobName = "run_" + parsec_names[indexContainers2and3]
+currentContainer = client.containers.run(parsec_jobs[0], command=jobCommand(indexContainers2and3,2), cpuset_cpus="2-3", detach=True, remove=False, name=jobName)
 runningContainer2and3 = currentContainer
 print(time.time())
 print(jobName + " started")
 
 # start canneal job
 # jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 1'"
-jobName = "run_" + parsec_names[4]
-currentContainer = client.containers.run(parsec_jobs[4], command=jobCommand(4,1), cpuset_cpus="1", detach=True, remove=False, name=jobName)
+jobName = "run_" + parsec_names[indexContainers1]
+currentContainer = client.containers.run(parsec_jobs[4], command=jobCommand(indexContainers1,1), cpuset_cpus="1", detach=True, remove=False, name=jobName)
 currentContainer.pause()
 runningContainer1 = currentContainer
 print(time.time())
 print(jobName + " started")
+skip = False
+done = False
 
 while(True):
     # get CPU values
@@ -75,16 +77,23 @@ while(True):
     if(myContainer.status == "exited"):
         print(time.time())
         print(myContainer.name + " done")
-        if(indexContainers2and3 == 2):
+        if (indexContainers2and3 == 3):
             #all jobs are already launched
+            if done:
+                 break
+            done = True
             continue
         indexContainers2and3 = indexContainers2and3 + 1
+        #if ((indexContainers2and3 == 1) and skip):
+        #    continue
         #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers2and3] + " -i native -n 2'"
         newJobName = "run_" + parsec_names[indexContainers2and3]
         stringCpuSet = "2-3"
         newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=jobCommand(indexContainers2and3,2), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer2and3 = newContainer
         print(newJobName + " started")
+        if (indexContainers2and3 == 1):
+            skip = True 
 
     # check whether the job running on core 1 exited by now
     # start a new one, if this is the case
@@ -93,16 +102,24 @@ while(True):
     if(myContainer.status == "exited"):
         print(time.time())
         print(myContainer.name + " done")
-        if(indexContainers1 == 2):
+        if (indexContainers1 == 5):
             #all jobs are already launched
+            if done:
+                 break
+            done = True
             continue
+            
         indexContainers1 = indexContainers1 + 1
+        #if ((indexContainers2and3 == 1) and skip):
+        #    continue
         #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers1 + 3] + " -i native -n 1'"
         newJobName = "run_" + parsec_names[indexContainers1]
         stringCpuSet = "1"
-        newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1 + 3, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
+        newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer1 = newContainer
         print(newJobName + " started")
+        if (indexContainers2and3 == 1):
+            skip = True 
 
     # check whether it's necessary to adjust the number of CPUs memcached has available
     if(cpuNum == 1 and cpu_usages[0] >= 90):
