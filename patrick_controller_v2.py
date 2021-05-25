@@ -67,60 +67,59 @@ print(jobName + " started")
 done1 = False
 done2 = False
 
-while(True):
+while((not done1) and (not done2)):
     # get CPU values
     cpu_usages = psutil.cpu_percent(percpu=True)
 
     # check whether the job running on cores 2 and 3 exited by now
     # start a new one, if this is the case
-    myJobName = runningContainer2and3.name
-    myContainer = client.containers.get(myJobName)
-    if(myContainer.status == "exited"):
-        print(time.time())
-        print(myContainer.name + " done")
-        if (indexContainers2and3 == 3):
-            #all jobs are already launched
-            if done2:
-                 break
-            done1 = True
-            continue
-        indexContainers2and3 = indexContainers2and3 + 1
-        #if ((indexContainers2and3 == 1) and skip):
-        #    continue
-        #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers2and3] + " -i native -n 2'"
-        newJobName = "run_" + parsec_names[indexContainers2and3]
-        stringCpuSet = "2-3"
-        newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=jobCommand(indexContainers2and3,2), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
-        runningContainer2and3 = newContainer
-        print(newJobName + " started")
-        #if (indexContainers2and3 == 1):
-        #    skip = True 
+    if (not done1):
+        myJobName = runningContainer2and3.name
+        myContainer = client.containers.get(myJobName)
+        if(myContainer.status == "exited"):
+            print(time.time())
+            print(myContainer.name + " done")
+            if (indexContainers2and3 == 3):
+                #all jobs done
+                done1 = True
+                continue
+                
+            indexContainers2and3 = indexContainers2and3 + 1
+            #if ((indexContainers2and3 == 1) and skip):
+            #    continue
+            #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers2and3] + " -i native -n 2'"
+            newJobName = "run_" + parsec_names[indexContainers2and3]
+            stringCpuSet = "2-3"
+            newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=jobCommand(indexContainers2and3,2), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
+            runningContainer2and3 = newContainer
+            print(newJobName + " started")
+            #if (indexContainers2and3 == 1):
+            #    skip = True 
 
     # check whether the job running on core 1 exited by now
     # start a new one, if this is the case
-    myJobName = runningContainer1.name
-    myContainer = client.containers.get(myJobName)
-    if(myContainer.status == "exited"):
-        print(time.time())
-        print(myContainer.name + " done")
-        if (indexContainers1 == 5):
-            #all jobs are already launched
-            if done1:
-                 break
-            done2 = True
-            continue
+    if (not done2):
+        myJobName = runningContainer1.name
+        myContainer = client.containers.get(myJobName)
+        if(myContainer.status == "exited"):
+            print(time.time())
+            print(myContainer.name + " done")
+            if (indexContainers1 == 5):
+                #all jobs done
+                done2 = True
+                continue
             
-        indexContainers1 = indexContainers1 + 1
-        #if ((indexContainers2and3 == 1) and skip):
-        #    continue
-        #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers1 + 3] + " -i native -n 1'"
-        newJobName = "run_" + parsec_names[indexContainers1]
-        stringCpuSet = "1"
-        newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
-        runningContainer1 = newContainer
-        print(newJobName + " started")
-        #if (indexContainers2and3 == 1):
-        #    skip = True 
+            indexContainers1 = indexContainers1 + 1
+            #if ((indexContainers2and3 == 1) and skip):
+            #    continue
+            #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers1 + 3] + " -i native -n 1'"
+            newJobName = "run_" + parsec_names[indexContainers1]
+            stringCpuSet = "1"
+            newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
+            runningContainer1 = newContainer
+            print(newJobName + " started")
+            #if (indexContainers2and3 == 1):
+            #    skip = True 
 
     # check whether it's necessary to adjust the number of CPUs memcached has available
     if(cpuNum == 1 and cpu_usages[0] >= 90):
