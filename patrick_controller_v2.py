@@ -67,7 +67,7 @@ print(jobName + " started")
 done1 = False
 done2 = False
 
-while((not done1) and (not done2)):
+while((not done1) or (not done2)):
     # get CPU values
     cpu_usages = psutil.cpu_percent(percpu=True)
 
