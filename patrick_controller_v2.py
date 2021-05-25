@@ -63,8 +63,9 @@ currentContainer.pause()
 runningContainer1 = currentContainer
 print(time.time())
 print(jobName + " started")
-skip = False
-done = False
+#skip = False
+done1 = False
+done2 = False
 
 while(True):
     # get CPU values
@@ -79,9 +80,9 @@ while(True):
         print(myContainer.name + " done")
         if (indexContainers2and3 == 3):
             #all jobs are already launched
-            if done:
+            if done2:
                  break
-            done = True
+            done1 = True
             continue
         indexContainers2and3 = indexContainers2and3 + 1
         #if ((indexContainers2and3 == 1) and skip):
@@ -92,8 +93,8 @@ while(True):
         newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=jobCommand(indexContainers2and3,2), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer2and3 = newContainer
         print(newJobName + " started")
-        if (indexContainers2and3 == 1):
-            skip = True 
+        #if (indexContainers2and3 == 1):
+        #    skip = True 
 
     # check whether the job running on core 1 exited by now
     # start a new one, if this is the case
@@ -104,9 +105,9 @@ while(True):
         print(myContainer.name + " done")
         if (indexContainers1 == 5):
             #all jobs are already launched
-            if done:
+            if done1:
                  break
-            done = True
+            done2 = True
             continue
             
         indexContainers1 = indexContainers1 + 1
@@ -118,8 +119,8 @@ while(True):
         newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer1 = newContainer
         print(newJobName + " started")
-        if (indexContainers2and3 == 1):
-            skip = True 
+        #if (indexContainers2and3 == 1):
+        #    skip = True 
 
     # check whether it's necessary to adjust the number of CPUs memcached has available
     if(cpuNum == 1 and cpu_usages[0] >= 90):
