@@ -12,4 +12,6 @@ Cloud Computing Architecture course project at ETH Zurich (FS 21).
 
 [Measurements part2](https://docs.google.com/spreadsheets/d/1l81qzppHAP3Sqr1R7zs9MRoF4-CGdVb_nXFCSrahHMY/edit#gid=0)
 
+[Measurements part3](https://docs.google.com/spreadsheets/d/1oK9-DFbw37AN7K4PUUjNtVpxBggqqOwWK2oSThqD1jk/edit?usp=sharing)
+
 [Measurements part4](https://docs.google.com/spreadsheets/d/1Gumx-z8kX_mbqMMwho4qOTf1x7lemiPC4OueNRWIXEs/edit)
