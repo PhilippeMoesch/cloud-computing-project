@@ -3,6 +3,9 @@ import docker
 import time
 import os
 import sys
+# sudo docker container stop run_canneal
+# sudo docker container stop run_freqmine
+# sudo docker system prune -a
 
 fft =  "anakli/parsec:splash2x-fft-native-reduced"
 freqmine = "anakli/parsec:freqmine-native-reduced"
@@ -41,19 +44,21 @@ indexContainers1 = 0
 
 # let memcached run on cores 0 and 1
 os.system('sudo taskset -a -cp 0-1 ' + pid)
+   
+jobCommand = lambda index, t : "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[index] + " -i native -n " + str(t) + "'"
 
 # start freqmine job
-jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 2'"
+#jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 2'"
 jobName = "run_" + parsec_names[0]
-currentContainer = client.containers.run(parsec_jobs[0], command=jobCommand, cpuset_cpus="2-3", detach=True, remove=True, name=jobName)
+currentContainer = client.containers.run(parsec_jobs[0], command=jobCommand(0,2), cpuset_cpus="2-3", detach=True, remove=False, name=jobName)
 runningContainer2and3 = currentContainer
 print(time.time())
 print(jobName + " started")
 
 # start canneal job
-jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 1'"
-jobName = "run_" + parsec_names[3]
-currentContainer = client.containers.run(parsec_jobs[3], command=jobCommand, cpuset_cpus="1", detach=True, remove=True, name=jobName)
+# jobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexJob] + " -i native -n 1'"
+jobName = "run_" + parsec_names[4]
+currentContainer = client.containers.run(parsec_jobs[4], command=jobCommand(4,1), cpuset_cpus="1", detach=True, remove=False, name=jobName)
 currentContainer.pause()
 runningContainer1 = currentContainer
 print(time.time())
@@ -74,10 +79,10 @@ while(True):
             #all jobs are already launched
             continue
         indexContainers2and3 = indexContainers2and3 + 1
-        newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers2and3] + " -i native -n 2'"
+        #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers2and3] + " -i native -n 2'"
         newJobName = "run_" + parsec_names[indexContainers2and3]
         stringCpuSet = "2-3"
-        newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=newJobCommand, cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
+        newContainer = client.containers.run(parsec_jobs[indexContainers2and3], command=jobCommand(indexContainers2and3,2), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer2and3 = newContainer
         print(newJobName + " started")
 
@@ -92,10 +97,10 @@ while(True):
             #all jobs are already launched
             continue
         indexContainers1 = indexContainers1 + 1
-        newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers1 + 3] + " -i native -n 1'"
+        #newJobCommand = "/bin/sh -c './bin/parsecmgmt -a run -p " + parsec_names[indexContainers1 + 3] + " -i native -n 1'"
         newJobName = "run_" + parsec_names[indexContainers1]
         stringCpuSet = "1"
-        newContainer = client.containers.run(parsec_jobs[indexContainers1], command=newJobCommand, cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
+        newContainer = client.containers.run(parsec_jobs[indexContainers1], command=jobCommand(indexContainers1 + 3, 1), cpuset_cpus=stringCpuSet, detach=True, remove=False, name=newJobName)
         runningContainer1 = newContainer
         print(newJobName + " started")
 
@@ -110,6 +115,6 @@ while(True):
         # decrease number of CPUs, unpause job running on core 1
         print(time.time())
         os.system('sudo taskset -a -cp 0 ' + pid)
-        runningContainer2.unpause()
+        runningContainer1.unpause()
         cpuNum = 1
     time.sleep(1)

@@ -45,47 +45,21 @@ id="moeschp"
       echo "cluster ready"
    }
 
-
-   parse_data() {
-      echo "parsing cluster data..."
-      printf "\n"
-
-      #sudo kubectl get nodes -o wide
-      t=$(sudo kubectl get nodes -o wide)
-      
-      if [[ "$1" == "ip_memcache" ]]; then
-         ips=$(echo "$t" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-         ips=($ips)
-         echo "${ips[6]}"
-      elif [[ "$1" == "ip_agent" ]]; then
-         ips=$(echo "$t" | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-         ips=($ips)
-         echo "${ips[0]}"
-      else
-         # specific VM name
-         name=($(echo "$t" | grep '$1'))
-         if [[ "$1" != "measure" ]]; then
-            name=${name[0]}
-         fi
-         echo "$name"
-      fi
-   }
    
    auth() {
-       #echo "gcloud auth application-default login"
-       #gcloud auth application-default login
-       export GOOGLE_APPLICATION_CREDENTIALS="project-cca-313617-45143eb20673.json"
-
+       echo "gcloud auth application-default login"
+       gcloud auth application-default login
    }
 
 
    install_() {
    
       echo "sending execution script to server"
-      gcloud compute scp --zone europe-west3-a $2 root@$1:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
+      #gcloud compute scp --zone europe-west3-a $2 root@$1:/home/ubuntu --ssh-key-file ~/.ssh/cloud-computing  
       echo "connection to server..."
       echo "run the script, execute ls to find it"
-      gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$1 --zone europe-west3-a
+      #gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$1 --zone europe-west3-a 'echo hello'
+
       echo "left vm"
          
    }
@@ -120,28 +94,41 @@ if [[ "$ans" == "6" ]]; then
     exit
 fi
  
-sudo apt install dos2unix
-sudo dos2unix setup_dyn_memc.sh
-sudo dos2unix setup_memc.sh
+echo "fetching cluster data..."
+printf "\n"
+
+t=$(kubectl get nodes -o wide)
+
+# in list form
+tl=($t)
+
+#sudo apt install dos2unix
+dos2unix setup_dyn_memc.sh
+dos2unix setup_memc.sh
 
 # memcache
-echo "installing memcache..."
-name="$(parse_data "memcache")"
 if [[ "$ans" == "1" || "$ans" == "4" ]]; then
-   install_ "$name" "setup_memc.sh"
+echo "installing memcache..."
+name="${tl[46]}"
+ip="${tl[52]}"
+echo $name
+echo $ip
+ssh -i ~/.ssh/cloud-computing ubuntu@$ip 'echo hello'
+# gcloud compute ssh --ssh-key-file ~/.ssh/cloud-computing ubuntu@$name --zone europe-west3-a
+   #install_ "$name" "setup_memc.sh"
 fi
 
 #agent
-echo "installing parsec on agent..."
-name="$(parse_data "agent")"
 if [[ "$ans" == "2" || "$ans" == "4" ]]; then
+echo "installing parsec on agent..."
+name="${tl[10]}"
    install_ "$name" "setup_dyn_memc.sh"
 fi
 
 #measure
-echo "installing parsec on measure..."
-name="$(parse_data "measure")"
 if [[ "$ans" == "3" || "$ans" == "4" ]]; then
+echo "installing parsec on measure..."
+name="${tl[22]}"
    install_ "$name" "setup_dyn_memc.sh"
 fi
 
