@@ -4,7 +4,9 @@ Cloud Computing Architecture course project at ETH Zurich (FS 21).
 
 --------------------
 
-[Report](https://www.overleaf.com/project/605339d6d4832978df1e67c7)
+[Report_1_2](https://www.overleaf.com/project/605339d6d4832978df1e67c7)
+
+[Report_3_4](https://www.overleaf.com/project/6082a7f936cda938403b60a3)
 
 --------------------
 
