@@ -83,7 +83,7 @@ while((not done1) or (not done2)):
                 #all jobs done
                 done1 = True
                 continue
-                
+                  
             indexContainers2and3 = indexContainers2and3 + 1
             #if ((indexContainers2and3 == 1) and skip):
             #    continue
@@ -122,16 +122,16 @@ while((not done1) or (not done2)):
             #    skip = True 
 
     # check whether it's necessary to adjust the number of CPUs memcached has available
-    if(cpuNum == 1 and cpu_usages[0] >= 90):
+    if(cpuNum == 1 and cpu_usages[0] >= 95):
         # increase number of CPUs, pause job running on core 1
         print(time.time())
         runningContainer1.pause()
         os.system('sudo taskset -a -cp 0-1 ' + pid)
         cpuNum = 2
-    elif(cpuNum == 2 and cpu_usages[0] <= 40):
+    elif(cpuNum == 2 and cpu_usages[0] <= 50):
         # decrease number of CPUs, unpause job running on core 1
         print(time.time())
         os.system('sudo taskset -a -cp 0 ' + pid)
         runningContainer1.unpause()
         cpuNum = 1
-    time.sleep(1)
+    time.sleep(3)
