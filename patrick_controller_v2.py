@@ -7,6 +7,12 @@ import sys
 # sudo docker container stop run_freqmine
 # sudo docker system prune -a
 
+#RUNNING = 'running'
+#container = DOCKER_CLIENT.containers.get(container_name)
+#container_state = container.attrs['State']
+#container_is_running = container_state['Status'] == RUNNING
+
+
 fft =  "anakli/parsec:splash2x-fft-native-reduced"
 freqmine = "anakli/parsec:freqmine-native-reduced"
 ferret = "anakli/parsec:ferret-native-reduced"
@@ -16,6 +22,8 @@ blackscholes = "anakli/parsec:blackscholes-native-reduced"
 
 parsec_jobs = [freqmine, ferret, blackscholes, fft, canneal, dedup]
 parsec_names = ["freqmine", "ferret", "blackscholes", "splash2x.fft", "canneal", "dedup"]
+parsec_start = [0, 0, 0, 0, 0, 0]
+parsec_end = [0, 0, 0, 0, 0, 0]
 
 # we run the first three images always on cores 2 and 3
 # the last three images are run on core 1, and paused/unpaused when needed 
@@ -130,17 +138,21 @@ while((not done1) or (not done2)):
     if (cpuNum == 1 and cpu_usages[0] >= 93):
         # increase number of CPUs, pause job running on core 1
         print(time.time())
-        if (runningContainer1.status == "running"):
-            print("pausing " + runningContainer1.name)
-            runningContainer1.pause()
+        #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
+        #if (runningContainer1.status == "running"):
+        print("pausing " + runningContainer1.name)
+        runningContainer1.pause()
+        #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
         os.system('sudo taskset -a -cp 0-1 ' + pid)
         cpuNum = 2
     elif(cpuNum == 2 and cpu_usages[0] <= 50):
         # decrease number of CPUs, unpause job running on core 1
         print(time.time())
-        if (runningContainer1.status == "paused"):
-            print("un-pause " + runningContainer1.name)
-            runningContainer1.unpause()
+        #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
+        #if (runningContainer1.status == "paused"):
+        print("un-pause " + runningContainer1.name)
+        runningContainer1.unpause()
+        #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
         os.system('sudo taskset -a -cp 0 ' + pid)
         cpuNum = 1
     time.sleep(2)
