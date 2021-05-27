@@ -140,8 +140,8 @@ while((not done1) or (not done2)):
             print(time.time())
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
             if (indexContainers1 < 5):
-            print("pausing " + runningContainer1.name)
-            runningContainer1.pause()
+                print("pausing " + runningContainer1.name)
+                runningContainer1.pause()
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
             os.system('sudo taskset -a -cp 0-1 ' + pid)
             cpuNum = 2
@@ -150,8 +150,8 @@ while((not done1) or (not done2)):
             print(time.time())
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
             if (indexContainers1 < 5):
-            print("un-pause " + runningContainer1.name)
-            runningContainer1.unpause()
+                print("un-pause " + runningContainer1.name)
+                runningContainer1.unpause()
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
             os.system('sudo taskset -a -cp 0 ' + pid)
             cpuNum = 1
