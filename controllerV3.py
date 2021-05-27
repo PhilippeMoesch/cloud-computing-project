@@ -20,8 +20,8 @@ canneal = "anakli/parsec:canneal-native-reduced"
 dedup = "anakli/parsec:dedup-native-reduced"
 blackscholes = "anakli/parsec:blackscholes-native-reduced"
 
-parsec_jobs = [freqmine, ferret, blackscholes, canneal, fft, dedup]
-parsec_names = ["freqmine", "ferret", "blackscholes", "canneal", "splash2x.fft", "dedup"]
+parsec_jobs = [canneal, ferret, blackscholes, freqmine, fft, dedup]
+parsec_names = ["canneal", "ferret", "blackscholes", "freqmine", "splash2x.fft", "dedup"]
 #parsec_start = [0, 0, 0, 0, 0, 0]
 #parsec_end = [0, 0, 0, 0, 0, 0]
 
@@ -135,7 +135,7 @@ while((not done1) or (not done2)):
             #      "cpu2 : " + str(cpu_usages[2]) + "\n" + 
             #      "cpu3 : " + str(cpu_usages[3]))
           
-        if (cpuNum == 1 and cpu_usages[0] >= 93):
+        if (cpuNum == 1 and cpu_usages[0] >= 85):
             # increase number of CPUs, pause job running on core 1
             print(time.time())
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
@@ -145,7 +145,7 @@ while((not done1) or (not done2)):
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
             os.system('sudo taskset -a -cp 0-1 ' + pid)
             cpuNum = 2
-        elif(cpuNum == 2 and cpu_usages[0] <= 50):
+        elif(cpuNum == 2 and cpu_usages[0] <= 40):
             # decrease number of CPUs, unpause job running on core 1
             print(time.time())
             #print ("status of " + runningContainer1.name + " : " + runningContainer1.status)
@@ -156,7 +156,7 @@ while((not done1) or (not done2)):
             os.system('sudo taskset -a -cp 0 ' + pid)
             cpuNum = 1
     else:
-        if(cpuNum == 1 and cpu_usages[0] >= 90):
+        if(cpuNum == 1 and cpu_usages[0] >= 85):
             print(time.time())
             os.system('sudo taskset -a -cp 0-1 ' + pid)
             runningContainer2and3.update(cpuset_cpus="2-3")
