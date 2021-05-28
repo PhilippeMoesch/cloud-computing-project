@@ -59,24 +59,26 @@ t2c2 <- t2c2 %>%
 			p95 = mean(p95),
 			QPS = mean(QPS))
 
-t1c1$Env <- "T1_C1"
-t1c2$Env <- "T1_C2"
-t2c1$Env <- "T2_C1"
-t2c2$Env <- "T2_C2"
+t1c1$Memc <- "T1_C1"
+t1c2$Memc <- "T1_C2"
+t2c1$Memc <- "T2_C1"
+t2c2$Memc <- "T2_C2"
 cpu_t2c1$run <- "1"
 cpu_t2c2$run <- "2"
 
 all<-rbind(t1c1,t1c2,t2c1,t2c2)
 
-p<-ggplot(data=all, aes(x = QPS, y = p95, group=Env, color=Env)) + 
-	geom_line(aes(linetype = Env)) + 
+p<-ggplot(data=all, aes(x = QPS, y = p95, group=Memc, color=Memc)) + 
+	geom_line(aes(linetype = Memc)) + 
 	geom_point() +
 	scale_y_continuous(labels=function(x)x/1000) +
 	geom_errorbar(aes(ymin = p95 - std_p, ymax = p95 + std_p),  size = 0.3, width = 200, alpha = 1) +
 	geom_errorbar(aes(xmin = QPS - std_q, xmax = QPS + std_q),  size = 0.3, width = 200, alpha = 1) +
 	scale_colour_brewer(palette = "Dark2") +
 	ggtitle("95th percentile latency\n[ms]") +
-	xlim(0,120000) +
+	coord_cartesian(ylim = c(0, 3500), xlim = c(0, 120000), clip = "off") +
+	scale_x_continuous(
+		labels=function(y) paste0(y/1000, "k")) +
 	labs(x = "QPS", y = "") +
 	theme(axis.text.x = element_text(family = "Helvetica",
 	  		face = "plain",
@@ -104,9 +106,9 @@ p<-ggplot(data=cpu_t2c1, aes(x = QPS)) +
 	geom_line(aes(y = cpu_utilization*35), colour="darkolivegreen3") + 
 	geom_text(aes(x=20000, label="p95", y=950, hjust=0), colour="darkgoldenrod3", angle=0, size=4 ) +
 	geom_text(aes(x=20000, label="cpu_util", y=2400, hjust=0), colour="darkolivegreen3", angle=0, size=4 ) +
-	annotate("text", x=70700, label="cpu_util", y=4250, angle=0, size=5 , family = "Helvetica", fontface = "bold", colour = "black",) +
-	coord_cartesian(ylim = c(0, 3600), clip = "off") +
-		scale_x_continuous(
+	annotate("text", x=105000, label="cpu_util", y=4200, hjust=1, angle=0, size=5 , family = "Helvetica", fontface = "bold", colour = "black",) +
+	coord_cartesian(ylim = c(0, 3600), xlim = c(0, 100000), clip = "off") +
+	scale_x_continuous(
 		labels=function(y) paste0(y/1000, "k")) +
 	scale_y_continuous(
 		labels=function(x)x/1000,
