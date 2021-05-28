@@ -1,0 +1,521 @@
+pulled image of anakli/parsec:freqmine-native-reduced
+pulled image of anakli/parsec:ferret-native-reduced
+pulled image of anakli/parsec:blackscholes-native-reduced
+pulled image of anakli/parsec:splash2x-fft-native-reduced
+pulled image of anakli/parsec:canneal-native-reduced
+pulled image of anakli/parsec:dedup-native-reduced
+created jobs for freqmine
+created jobs for ferret
+created jobs for blackscholes
+created jobs for splash2x.fft
+created jobs for canneal
+created jobs for dedup
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655217.0002728
+run_freqmine started
+1620655220.0246973
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655227.129285
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655296.6177902
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655306.7428324
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655327.1541398
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655337.2791972
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655507.4621077
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655517.5855591
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655587.0377002
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655590.297809
+run_freqmine done
+run_ferret started
+1620655606.7608953
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655637.0165973
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655647.139189
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655807.0691452
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655827.232242
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655857.4580634
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655877.6150725
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620655926.9329696
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620655955.1453962
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656016.6926315
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620656026.8463748
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656277.2016478
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620656287.3536215
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656310.7593706
+run_ferret done
+run_blackscholes started
+1620656521.3081331
+run_blackscholes done
+run_splash2x.fft started
+run_canneal started
+1620656667.3928683
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620656707.6400092
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656767.0292606
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620656787.1965048
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656807.394349
+pid 21656's current affinity list: 0,1
+pid 21656's new affinity list: 0
+pid 21668's current affinity list: 0,1
+pid 21668's new affinity list: 0
+pid 21669's current affinity list: 0,1
+pid 21669's new affinity list: 0
+pid 21670's current affinity list: 0,1
+pid 21670's new affinity list: 0
+pid 21672's current affinity list: 0,1
+pid 21672's new affinity list: 0
+pid 21673's current affinity list: 0,1
+pid 21673's new affinity list: 0
+pid 21674's current affinity list: 0,1
+pid 21674's new affinity list: 0
+pid 21675's current affinity list: 0,1
+pid 21675's new affinity list: 0
+1620656839.6068556
+run_canneal done
+run_dedup started
+1620656846.989923
+pid 21656's current affinity list: 0
+pid 21656's new affinity list: 0,1
+pid 21668's current affinity list: 0
+pid 21668's new affinity list: 0,1
+pid 21669's current affinity list: 0
+pid 21669's new affinity list: 0,1
+pid 21670's current affinity list: 0
+pid 21670's new affinity list: 0,1
+pid 21672's current affinity list: 0
+pid 21672's new affinity list: 0,1
+pid 21673's current affinity list: 0
+pid 21673's new affinity list: 0,1
+pid 21674's current affinity list: 0
+pid 21674's new affinity list: 0,1
+pid 21675's current affinity list: 0
+pid 21675's new affinity list: 0,1
+1620656900.3416574
+run_dedup done
